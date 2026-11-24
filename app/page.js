@@ -3,7 +3,7 @@
 import "./login.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { validarLogin } from "../actions/usuarioActions";
+import { validarLogin } from "./actions/usuarioActions";
 
 export default function TelaLogin() {
 

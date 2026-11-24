@@ -1,0 +1,23 @@
+.container-login {
+  max-width: 320px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: sans-serif;
+}
+
+.formulario-login {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.botao-entrar {
+  background-color: #80ca4e;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

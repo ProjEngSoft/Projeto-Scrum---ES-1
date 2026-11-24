@@ -1,0 +1,30 @@
+{
+  "name": "projeto-scrum---es-1-1",
+  "version": "1.0.0",
+  "description": "Repositório dedicado ao projeto de desenvolvimento de software com Scrum da matéria de Engenharia de software 1. Desenvolvendo uma aplicação de procura de serviços pela sua cidade, com JavaScript e React. O objetivo será que o software seja no estilo de uma rede social voltada para Trabalhadores criarem perfis e serem vistos e achados mais facilmente pelos clientes, que também criam uma conta para postar sobre seus poblemas com objetos quebrados e achar alguem que possa fazer o serviço de conserto.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProjEngSoft/Projeto-Scrum---ES-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ProjEngSoft/Projeto-Scrum---ES-1/issues"
+  },
+  "homepage": "https://github.com/ProjEngSoft/Projeto-Scrum---ES-1#readme",
+  "dependencies": {
+    "next": "^16.4.6"
+  }
+}

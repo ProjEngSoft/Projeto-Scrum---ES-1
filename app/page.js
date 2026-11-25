@@ -55,7 +55,7 @@ export default function TelaLogin() {
             </form>
 
             <p>
-                Não tem uma conta? <Link href="/cadastro">Cadastre-se</Link>
+                Não tem uma conta? <Link href="/cadastrar">Cadastre-se</Link>
             </p>
         </div>
 

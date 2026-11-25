@@ -64,3 +64,46 @@
     border: 1px solid #ddd;
     border-radius: 10px;
 }
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.campo input,
+.campo textarea {
+    width: 100%;
+    padding: 13px 15px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.opcoes button {
+    transition: 0.2s;
+}
+
+.opcoes button.selecionado {
+    background-color: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}

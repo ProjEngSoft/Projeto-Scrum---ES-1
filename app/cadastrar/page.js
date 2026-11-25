@@ -29,7 +29,7 @@ export default function cadastroPage(){
                 <section className={styles.formulario}>
                     <h2>Dados do cadastro</h2>
                 </section>
-
+                <p>Voltar para <a href='./'>tela inicial</a></p>
             </div>
         </main>
     );

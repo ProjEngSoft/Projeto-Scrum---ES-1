@@ -1,6 +1,6 @@
 <div align="center">
 
-# Conserta Aqui
+# ConsertAí
 
 **Encontrar quem resolve ficou mais fácil.**
 
@@ -21,7 +21,7 @@ Plataforma de serviços de reparo que conecta quem tem um objeto danificado a pr
 
 ## Sobre o projeto
 
-O **Conserta Aqui** nasce de uma situação comum: quando algo quebra, nem sempre sabemos **quem conserta**, **quanto custa** ou **se vale mais a pena comprar um novo**. A ideia é reunir essas informações em um só lugar para apoiar a decisão do usuário e incentivar o reparo em vez do descarte.
+O **ConsertAí** nasce de uma situação comum: quando algo quebra, nem sempre sabemos **quem conserta**, **quanto custa** ou **se vale mais a pena comprar um novo**. A ideia é reunir essas informações em um só lugar para apoiar a decisão do usuário e incentivar o reparo em vez do descarte.
 
 O produto prevê três perfis:
 

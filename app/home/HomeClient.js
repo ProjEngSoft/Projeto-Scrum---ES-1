@@ -248,7 +248,7 @@ export default function HomeClient({ usuarioInicial }) {
             <span className="home-marca-icone" aria-hidden="true">
               +
             </span>
-            Conserta Aqui
+            ConsertAí
           </Link>
 
           <div className="home-topo-acoes">

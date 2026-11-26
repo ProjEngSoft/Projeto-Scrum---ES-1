@@ -492,8 +492,8 @@ O dicionário de dados apresenta a finalidade de cada tabela e descreve seus atr
 
 ## 8. Referências
 
-- Documento de Visão do projeto Conserta Aqui.
-- Product Backlog e planejamento do projeto Conserta Aqui.
+- Documento de Visão do projeto ConsertAí.
+- Product Backlog e planejamento do projeto ConsertAí.
 - Mermaid. **Documentação da sintaxe de diagramas de classes:** https://mermaid.js.org/syntax/classDiagram.html
 - Mermaid. **Documentação da sintaxe de diagramas ER:** https://mermaid.js.org/syntax/entityRelationshipDiagram.html
 - Brasil. **Lei nº 13.709, de 14 de agosto de 2018 — Lei Geral de Proteção de Dados Pessoais (LGPD).**

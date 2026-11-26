@@ -345,7 +345,7 @@ ALTER TABLE "denuncia" ADD CONSTRAINT "denuncia_profissional_id_fkey" FOREIGN KE
 -- AddForeignKey
 ALTER TABLE "denuncia" ADD CONSTRAINT "denuncia_analisado_por_id_fkey" FOREIGN KEY ("analisado_por_id") REFERENCES "usuario"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
--- Regras de integridade (CHECK constraints) do Conserta Aqui
+-- Regras de integridade (CHECK constraints) do ConsertAí
 ALTER TABLE "avaliacao"
   ADD CONSTRAINT "chk_avaliacao_nota_range" CHECK ("nota" >= 1 AND "nota" <= 5);
 

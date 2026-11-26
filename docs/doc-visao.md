@@ -1,12 +1,12 @@
 # Documento de Visão
 
-Documento elaborado com base no **Modelo BSI - Doc 001 - Documento de Visão**, no documento de planejamento *Conserta Aqui — Product Backlog e Planejamento do Projeto com Scrum* e nas informações disponíveis no repositório do projeto.
+Documento elaborado com base no **Modelo BSI - Doc 001 - Documento de Visão**, no documento de planejamento *ConsertAí — Product Backlog e Planejamento do Projeto com Scrum* e nas informações disponíveis no repositório do projeto.
 
 Modelo de referência: https://docs.google.com/document/d/1DPBcyGHgflmz5RDsZQ2X8KVBPoEF5PdAz9BBNFyLa6A/edit?usp=sharing
 
 ## Descrição do Projeto
 
-O **Conserta Aqui** é uma plataforma digital que tem como objetivo conectar pessoas que possuem objetos danificados a profissionais que oferecem serviços de reparo. A proposta é facilitar a busca por prestadores de serviço, a descrição dos problemas encontrados nos objetos, a solicitação e o recebimento de orçamentos e a comparação entre o custo do conserto e o preço de um produto novo equivalente.
+O **ConsertAí** é uma plataforma digital que tem como objetivo conectar pessoas que possuem objetos danificados a profissionais que oferecem serviços de reparo. A proposta é facilitar a busca por prestadores de serviço, a descrição dos problemas encontrados nos objetos, a solicitação e o recebimento de orçamentos e a comparação entre o custo do conserto e o preço de um produto novo equivalente.
 
 O projeto busca atender a uma situação comum: quando um objeto apresenta defeito, muitas pessoas não sabem quanto custará o reparo, quais profissionais realizam aquele serviço ou se vale a pena consertar o objeto em vez de substituí-lo. A plataforma pretende centralizar essas informações para apoiar a tomada de decisão do usuário, facilitar o contato entre clientes e profissionais e incentivar o conserto em vez do descarte prematuro.
 
@@ -356,7 +356,7 @@ Os requisitos não funcionais definem características de qualidade, segurança 
 
 ## Riscos
 
-A tabela apresenta riscos identificados no planejamento inicial do Conserta Aqui. As datas, responsáveis e situações devem ser atualizados pela equipe durante o desenvolvimento.
+A tabela apresenta riscos identificados no planejamento inicial do ConsertAí. As datas, responsáveis e situações devem ser atualizados pela equipe durante o desenvolvimento.
 
 | Data | Risco | Prioridade | Responsável | Status | Providência/Solução |
 |------|-------|------------|-------------|--------|---------------------|
@@ -366,7 +366,7 @@ A tabela apresenta riscos identificados no planejamento inicial do Conserta Aqui
 
 ## Referências
 
-- **Conserta Aqui — Product Backlog e Planejamento do Projeto com Scrum.** Documento de planejamento inicial do produto, versão 1.0, novembro de 2026. Material fornecido pela equipe.
+- **ConsertAí — Product Backlog e Planejamento do Projeto com Scrum.** Documento de planejamento inicial do produto, versão 1.0, novembro de 2026. Material fornecido pela equipe.
 - **Modelo BSI - Doc 001 - Documento de Visão.** Disponível em: https://docs.google.com/document/d/1DPBcyGHgflmz5RDsZQ2X8KVBPoEF5PdAz9BBNFyLa6A/edit?usp=sharing. Acesso em: [PREENCHER].
 - **Repositório Projeto-Scrum-ES-1.** Disponível em: https://github.com/ProjEngSoft/Projeto-Scrum---ES-1. Acesso em: [PREENCHER].
 - **Documentação do Mermaid.** Disponível em: https://mermaid.js.org/. Acesso em: [PREENCHER].

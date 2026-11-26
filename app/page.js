@@ -38,7 +38,7 @@ export default function TelaLogin() {
           <span className="marca-icone" aria-hidden="true">
             +
           </span>
-          Conserta Aqui
+          ConsertAí
         </Link>
 
         <div className="apresentacao-conteudo">
@@ -123,7 +123,7 @@ export default function TelaLogin() {
 
           <p className="texto-cadastro">
             Ainda não tem uma conta?{" "}
-            <Link href="/cadastro">Cadastre-se grátis</Link>
+            <Link href="/cadastro">Cadastre-se</Link>
           </p>
         </div>
 

@@ -5,8 +5,8 @@ import { obterDadosConta } from "../../lib/services/usuarioService.js";
 import HomeClient from "./HomeClient";
 
 export const metadata = {
-  title: "Minha Conta | Conserta Aqui",
-  description: "Visualize e gerencie os dados da sua conta no Conserta Aqui.",
+  title: "Minha Conta | ConsertAí",
+  description: "Visualize e gerencie os dados da sua conta no ConsertAí.",
 };
 
 export default async function TelaHome() {

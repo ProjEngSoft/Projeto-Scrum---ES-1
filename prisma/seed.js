@@ -101,7 +101,7 @@ async function main() {
     where: { email: adminEmail },
     update: {},
     create: {
-      nome: "Administrador Conserta Aqui",
+      nome: "Administrador ConsertAí",
       email: adminEmail,
       senhaHash,
       perfil: "ADMIN",

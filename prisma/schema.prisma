@@ -1,0 +1,301 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PerfilUsuario {
+  CLIENTE
+  PROFISSIONAL
+  AMBOS
+  ADMIN
+}
+
+enum StatusUsuario {
+  ATIVO
+  BLOQUEADO
+  EXCLUIDO
+}
+
+enum TipoPessoa {
+  PF
+  PJ
+}
+
+enum StatusEspecialidade {
+  PENDENTE
+  APROVADA
+  REJEITADA
+}
+
+enum StatusSolicitacao {
+  ABERTA
+  EM_ORCAMENTO
+  ACEITA
+  EM_ANDAMENTO
+  CONCLUIDA
+  CANCELADA
+}
+
+enum StatusOrcamento {
+  SOLICITADO
+  ENVIADO
+  ACEITO
+  RECUSADO
+  CANCELADO
+}
+
+enum StatusDenuncia {
+  ABERTA
+  EM_ANALISE
+  PROCEDENTE
+  IMPROCEDENTE
+}
+
+model Usuario {
+  id             Int           @id @default(autoincrement())
+  nome           String        @db.VarChar(150)
+  email          String        @unique @db.VarChar(150)
+  senhaHash      String        @map("senha_hash") @db.VarChar(255)
+  telefone       String?       @db.VarChar(20)
+  perfil         PerfilUsuario @default(CLIENTE)
+  status         StatusUsuario @default(ATIVO)
+  motivoBloqueio String?       @map("motivo_bloqueio") @db.VarChar(500)
+  criadoEm       DateTime      @default(now()) @map("criado_em")
+  atualizadoEm   DateTime      @updatedAt @map("atualizado_em")
+  excluidoEm     DateTime?     @map("excluido_em")
+
+  cliente              Cliente?
+  profissional         Profissional?
+  sessoes              Sessao[]
+  tokensRecuperacao    TokenRecuperacaoSenha[]
+  denunciasRegistradas Denuncia[]              @relation("DenunciaAutor")
+  denunciasAnalisadas  Denuncia[]              @relation("DenunciaAnalista")
+
+  @@index([status])
+  @@map("usuario")
+}
+
+model Sessao {
+  id        String   @id @default(cuid())
+  usuarioId Int      @map("usuario_id")
+  tokenHash String   @unique @map("token_hash") @db.VarChar(64)
+  expiraEm  DateTime @map("expira_em")
+  criadoEm  DateTime @default(now()) @map("criado_em")
+
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId])
+  @@index([expiraEm])
+  @@map("sessao")
+}
+
+model TokenRecuperacaoSenha {
+  id        Int       @id @default(autoincrement())
+  usuarioId Int       @map("usuario_id")
+  tokenHash String    @unique @map("token_hash") @db.VarChar(64)
+  expiraEm  DateTime  @map("expira_em")
+  usadoEm   DateTime? @map("usado_em")
+  criadoEm  DateTime  @default(now()) @map("criado_em")
+
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId])
+  @@map("token_recuperacao_senha")
+}
+
+model Cliente {
+  usuarioId Int     @id @map("usuario_id")
+  cpf       String? @unique @db.VarChar(11)
+
+  usuario      Usuario       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  solicitacoes Solicitacao[]
+  avaliacoes   Avaliacao[]
+
+  @@map("cliente")
+}
+
+model Profissional {
+  usuarioId          Int        @id @map("usuario_id")
+  tipoPessoa         TipoPessoa @map("tipo_pessoa")
+  cpf                String?    @unique @db.VarChar(11)
+  cnpj               String?    @unique @db.VarChar(14)
+  descricao          String?    @db.VarChar(1000)
+  regiaoAtendimento  String?    @map("regiao_atendimento") @db.VarChar(255)
+  uf                 String?    @db.VarChar(2)
+  cidade             String?    @db.VarChar(100)
+  bairro             String?    @db.VarChar(100)
+  horarioAtendimento String?    @map("horario_atendimento") @db.VarChar(255)
+  ativo              Boolean    @default(true)
+
+  usuario                 Usuario                     @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  categorias              ProfissionalCategoria[]
+  especialidades          ProfissionalEspecialidade[]
+  especialidadesSugeridas Especialidade[]
+  orcamentos              Orcamento[]
+  avaliacoesRecebidas     Avaliacao[]
+  denunciasRecebidas      Denuncia[]
+
+  @@index([ativo, cidade])
+  @@map("profissional")
+}
+
+model Categoria {
+  id        Int     @id @default(autoincrement())
+  nome      String  @unique @db.VarChar(100)
+  descricao String? @db.VarChar(500)
+  ativa     Boolean @default(true)
+
+  especialidades Especialidade[]
+  profissionais  ProfissionalCategoria[]
+  solicitacoes   Solicitacao[]
+
+  @@map("categoria")
+}
+
+model Especialidade {
+  id                    Int                 @id @default(autoincrement())
+  categoriaId           Int                 @map("categoria_id")
+  profissionalSugeriuId Int?                @map("profissional_sugeriu_id")
+  nome                  String              @db.VarChar(100)
+  descricao             String?             @db.VarChar(500)
+  status                StatusEspecialidade @default(APROVADA)
+
+  categoria           Categoria                   @relation(fields: [categoriaId], references: [id], onDelete: Restrict)
+  profissionalSugeriu Profissional?               @relation(fields: [profissionalSugeriuId], references: [usuarioId], onDelete: SetNull)
+  profissionais       ProfissionalEspecialidade[]
+
+  @@unique([categoriaId, nome])
+  @@index([categoriaId, status])
+  @@map("especialidade")
+}
+
+model ProfissionalCategoria {
+  profissionalId Int @map("profissional_id")
+  categoriaId    Int @map("categoria_id")
+
+  profissional Profissional @relation(fields: [profissionalId], references: [usuarioId], onDelete: Cascade)
+  categoria    Categoria    @relation(fields: [categoriaId], references: [id], onDelete: Cascade)
+
+  @@id([profissionalId, categoriaId])
+  @@index([categoriaId])
+  @@map("profissional_categoria")
+}
+
+model ProfissionalEspecialidade {
+  profissionalId  Int @map("profissional_id")
+  especialidadeId Int @map("especialidade_id")
+
+  profissional  Profissional  @relation(fields: [profissionalId], references: [usuarioId], onDelete: Cascade)
+  especialidade Especialidade @relation(fields: [especialidadeId], references: [id], onDelete: Cascade)
+
+  @@id([profissionalId, especialidadeId])
+  @@index([especialidadeId])
+  @@map("profissional_especialidade")
+}
+
+model Solicitacao {
+  id               Int               @id @default(autoincrement())
+  clienteId        Int               @map("cliente_id")
+  categoriaId      Int               @map("categoria_id")
+  objeto           String            @db.VarChar(150)
+  descricaoDefeito String            @map("descricao_defeito") @db.VarChar(2000)
+  marca            String?           @db.VarChar(100)
+  modelo           String?           @db.VarChar(100)
+  tempoDefeito     String?           @map("tempo_defeito") @db.VarChar(100)
+  localizacao      String            @db.VarChar(255)
+  uf               String?           @db.VarChar(2)
+  cidade           String?           @db.VarChar(100)
+  bairro           String?           @db.VarChar(100)
+  precoProdutoNovo Decimal?          @map("preco_produto_novo") @db.Decimal(10, 2)
+  status           StatusSolicitacao @default(ABERTA)
+  criadoEm         DateTime          @default(now()) @map("criado_em")
+  atualizadoEm     DateTime          @updatedAt @map("atualizado_em")
+
+  cliente    Cliente           @relation(fields: [clienteId], references: [usuarioId], onDelete: Restrict)
+  categoria  Categoria         @relation(fields: [categoriaId], references: [id], onDelete: Restrict)
+  fotos      FotoSolicitacao[]
+  orcamentos Orcamento[]
+
+  @@index([clienteId, status])
+  @@index([categoriaId, status])
+  @@map("solicitacao")
+}
+
+model FotoSolicitacao {
+  id             Int      @id @default(autoincrement())
+  solicitacaoId  Int      @map("solicitacao_id")
+  caminhoArquivo String   @map("caminho_arquivo") @db.VarChar(500)
+  mimeType       String   @map("mime_type") @db.VarChar(100)
+  tamanhoBytes   Int      @map("tamanho_bytes")
+  ordem          Int      @default(0)
+  enviadoEm      DateTime @default(now()) @map("enviado_em")
+
+  solicitacao Solicitacao @relation(fields: [solicitacaoId], references: [id], onDelete: Cascade)
+
+  @@index([solicitacaoId])
+  @@map("foto_solicitacao")
+}
+
+model Orcamento {
+  id             Int             @id @default(autoincrement())
+  solicitacaoId  Int             @map("solicitacao_id")
+  profissionalId Int             @map("profissional_id")
+  valor          Decimal         @db.Decimal(10, 2)
+  descricao      String          @db.VarChar(2000)
+  prazoEstimado  String?         @map("prazo_estimado") @db.VarChar(100)
+  status         StatusOrcamento @default(ENVIADO)
+  enviadoEm      DateTime        @default(now()) @map("enviado_em")
+  respondidoEm   DateTime?       @map("respondido_em")
+
+  solicitacao  Solicitacao  @relation(fields: [solicitacaoId], references: [id], onDelete: Restrict)
+  profissional Profissional @relation(fields: [profissionalId], references: [usuarioId], onDelete: Restrict)
+  avaliacao    Avaliacao?
+
+  @@unique([solicitacaoId, profissionalId])
+  @@index([solicitacaoId, status])
+  @@index([profissionalId, status])
+  @@map("orcamento")
+}
+
+model Avaliacao {
+  id             Int      @id @default(autoincrement())
+  clienteId      Int      @map("cliente_id")
+  profissionalId Int      @map("profissional_id")
+  orcamentoId    Int      @unique @map("orcamento_id")
+  nota           Int
+  comentario     String?  @db.VarChar(1000)
+  criadaEm       DateTime @default(now()) @map("criada_em")
+
+  cliente      Cliente      @relation(fields: [clienteId], references: [usuarioId], onDelete: Restrict)
+  profissional Profissional @relation(fields: [profissionalId], references: [usuarioId], onDelete: Restrict)
+  orcamento    Orcamento    @relation(fields: [orcamentoId], references: [id], onDelete: Restrict)
+
+  @@index([profissionalId])
+  @@index([clienteId])
+  @@map("avaliacao")
+}
+
+model Denuncia {
+  id             Int            @id @default(autoincrement())
+  usuarioId      Int            @map("usuario_id")
+  profissionalId Int            @map("profissional_id")
+  analisadoPorId Int?           @map("analisado_por_id")
+  motivo         String         @db.VarChar(150)
+  descricao      String?        @db.VarChar(2000)
+  status         StatusDenuncia @default(ABERTA)
+  decisaoAdmin   String?        @map("decisao_admin") @db.VarChar(1000)
+  criadaEm       DateTime       @default(now()) @map("criada_em")
+  analisadaEm    DateTime?      @map("analisada_em")
+
+  usuario      Usuario      @relation("DenunciaAutor", fields: [usuarioId], references: [id], onDelete: Restrict)
+  profissional Profissional @relation(fields: [profissionalId], references: [usuarioId], onDelete: Restrict)
+  analisadoPor Usuario?     @relation("DenunciaAnalista", fields: [analisadoPorId], references: [id], onDelete: SetNull)
+
+  @@index([profissionalId, status])
+  @@index([status])
+  @@map("denuncia")
+}

@@ -1,0 +1,162 @@
+
+.pagina-cadastro {
+  --verde-escuro: #14532d;
+  --verde: #16834a;
+  --texto: #17251c;
+  --texto-suave: #68756c;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 10% 15%, rgba(22, 131, 74, 0.10), transparent 30%),
+    radial-gradient(circle at 90% 85%, rgba(22, 131, 74, 0.10), transparent 30%),
+    #f5f8f5;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--texto);
+}
+
+.container-login {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 490px;
+  padding: 42px;
+  border: 1px solid #e5ece6;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 12px 40px rgba(20, 83, 45, 0.08);
+}
+
+.container-login h1 {
+  margin: 0 0 10px;
+  color: var(--texto);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.container-login h1::before {
+  content: "Conserta Aqui";
+  display: block;
+  margin-bottom: 28px;
+  color: var(--verde);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.formulario-login {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 28px;
+}
+
+.formulario-login label {
+  margin-top: 9px;
+  color: #34443a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.formulario-login input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 49px;
+  padding: 0 14px;
+  border: 1px solid #d8e1da;
+  border-radius: 10px;
+  outline: none;
+  background: #fbfdfb;
+  color: var(--texto);
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.formulario-login input::placeholder {
+  color: #a0aaa3;
+}
+
+.formulario-login input:hover {
+  border-color: #a8c5b0;
+}
+
+.formulario-login input:focus {
+  border-color: var(--verde);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(22, 131, 74, 0.12);
+}
+
+.botao-entrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 51px;
+  margin-top: 19px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #16834a, #116b3b);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(22, 131, 74, 0.17);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.botao-entrar:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(22, 131, 74, 0.25);
+}
+
+.botao-entrar:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.mensagem-erro {
+  margin: 10px 0;
+  padding: 12px;
+  border: 1px solid #fecdca;
+  border-radius: 9px;
+  background: #fef3f2;
+  color: #b42318;
+  font-size: 14px;
+}
+
+.container-login > p {
+  margin: 25px 0 0;
+  color: var(--texto-suave);
+  text-align: center;
+  font-size: 14px;
+}
+
+.container-login > p a {
+  color: var(--verde);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.container-login > p a:hover {
+  color: var(--verde-escuro);
+  text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+  .pagina-cadastro {
+    padding: 20px 14px;
+  }
+
+  .container-login {
+    padding: 30px 22px;
+    border-radius: 16px;
+  }
+
+  .container-login h1 {
+    font-size: 28px;
+  }
+}

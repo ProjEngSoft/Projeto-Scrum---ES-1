@@ -1,25 +1,32 @@
-import "../login.css";
+import "./home.css";
 import { redirect } from "next/navigation";
 import { obterUsuarioSessao } from "../../lib/auth.js";
-import { encerrarSessaoAction } from "../actions/usuarioActions";
+import { obterDadosConta } from "../../lib/services/usuarioService.js";
+import HomeClient from "./HomeClient";
+
+export const metadata = {
+  title: "Minha Conta | Conserta Aqui",
+  description: "Visualize e gerencie os dados da sua conta no Conserta Aqui.",
+};
 
 export default async function TelaHome() {
-  const usuario = await obterUsuarioSessao();
+  const sessao = await obterUsuarioSessao();
 
-  if (!usuario) {
+  if (!sessao) {
     redirect("/");
   }
 
-  return (
-    <div className="container-home">
-      <h1>Bem-vindo(a), {usuario.nome}!</h1>
-      <p>Você está logado(a) com o e-mail {usuario.email} ({usuario.perfil}).</p>
+  const dadosConta = await obterDadosConta(sessao.id);
 
-      <form action={encerrarSessaoAction}>
-        <button type="submit" className="botao-sair">
-          Sair
-        </button>
-      </form>
-    </div>
-  );
+  if (!dadosConta) {
+    redirect("/");
+  }
+
+  const dadosSerializados = {
+    ...dadosConta,
+    criadoEm: dadosConta.criadoEm.toISOString(),
+    atualizadoEm: dadosConta.atualizadoEm.toISOString(),
+  };
+
+  return <HomeClient usuarioInicial={dadosSerializados} />;
 }
